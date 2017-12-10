@@ -1,0 +1,3 @@
+1.composer.phar create-project yiisoft/yii2-app-basic treasure 2.0.13 // скачиваем фреймворк
+2.php yii migrate/create create_comment_table // создаем миграцию таблицы (нужно создать базу данных)
+3.php yii migrate // проводим иньекцию в базу данных из миграции
