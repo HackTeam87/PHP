@@ -8,14 +8,17 @@
     <title>Document</title>
 </head>
 <body>
+<h1>Hello Grin</h1>
 
-@extends('layout.site');
-<!-- Content -->
-@section('content');
-<h1>hi grin</h1>
-@show
+@foreach ($posts as $post)
+
+    <span class="short" > {!! $post->title !!}</span>
+    <span class="short" > {!! $post->short_text !!}</span>
+    <span class="short" > {!! $post->text !!}</span>
 
 
+
+@endforeach
 
 </body>
 </html>

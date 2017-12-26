@@ -28,11 +28,13 @@
 
                             @foreach ($posts as $post)
 
-                                <a href="/" class="cola">{!! $post->title !!}</a>
-                                <br>
-                                <span class="short" > {!! $post->short !!}</span>
+                                <span class="short" > {!! $post->title !!}</span>
 
-                                <img src="{!! $post->image !!}"  alt="img" width="150px" />
+                                {{--<a href="/" class="cola">{!! $post->title !!}</a>--}}
+                                {{--<br>--}}
+                                {{--<span class="short" > {!! $post->short !!}</span>--}}
+
+                                {{--<img src="{!! $post->image !!}"  alt="img" width="150px" />--}}
 
                             @endforeach
 
@@ -63,15 +65,16 @@
 
                         <!-- Main Content -->
                         <section>
-                            @foreach ($posts as $post)
+                            {{--@foreach ($posts as $post)--}}
 
-                                <a href="/" class="cola">{!! $post->title !!}</a>
-                                <br>
-                                <span class="short" > {!! $post->short !!}</span>
+                                {{--<a href="/" class="cola">{!! $post->title !!}</a>--}}
+                                {{--<br>--}}
+                                {{--<span class="short" > {!! $post->short !!}</span>--}}
 
-                                <img src="{!! $post->image !!}"  alt="img" width="150px" />
+                                {{--<img src="{!! $post->image !!}"  alt="img" width="150px" />--}}
+                                {{----}}
 
-                            @endforeach
+                            {{--@endforeach--}}
                         </section>
 
                     </div>
@@ -79,15 +82,15 @@
 
                         <!-- Right Sidebar -->
                         <section>
-                            @foreach ($posts as $post)
+                            {{--@foreach ($posts as $post)--}}
 
-                                <a href="/" class="cola">{!! $post->title !!}</a>
-                                <br>
-                                <span class="short" > {!! $post->short !!}</span>
+                                {{--<a href="/" class="cola">{!! $post->title !!}</a>--}}
+                                {{--<br>--}}
+                                {{--<span class="short" > {!! $post->short !!}</span>--}}
 
-                                <img src="{!! $post->image !!}"  alt="img" width="150px" />
+                                {{--<img src="{!! $post->image !!}"  alt="img" width="150px" />--}}
 
-                            @endforeach
+                            {{--@endforeach--}}
                         </section>
 
 

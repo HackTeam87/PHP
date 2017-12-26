@@ -11,33 +11,25 @@
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
 
 
 Route::get('/', function () {
-    return view('layout.site');
+    return view('site.index');
 });
-
 
 //all pages
 
-Route::get('/one', function () {
-    return view('pages.one');
-});
 
 
-Route::get('/two1', function () {
-    return view('pages.two1');
-});
 
 
-Route::get('/two2', function () {
-    return view('pages.two2');
-});
+Route::get('/four', 'TaskController@Index' )->name('task.index');
+
+Route::get('tasks/create', 'TaskController@create' )->name('task.create');
+
+Route::post('tasks/store', 'TaskController@store' )->name('tasks.store');
 
 
-Route::get('/three', 'HomeController@IndexOne' );
+
+Route::get('/posts', 'Admin\AdminPostController@index');
 

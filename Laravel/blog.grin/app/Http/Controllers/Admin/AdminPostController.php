@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Post;
 
-class HomeController extends Controller
+class AdminPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layout.site');
+        $posts = DB::select(' select * from post ');
+        return view('posts.index',['posts'=>$posts]);
     }
 
     /**
@@ -35,7 +38,10 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Post::create($request->all());
+
+        return redirect()->route('posts.index',['id = 1']);
+
     }
 
     /**
@@ -81,17 +87,5 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-
-
-    // all pages
-
-
-    public function indexOne()
-    {
-        $posts = DB::select(' select * from array ');
-        return view('pages.three',['posts'=>$posts]);
     }
 }

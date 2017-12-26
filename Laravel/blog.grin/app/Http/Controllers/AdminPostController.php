@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class AdminPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layout.site');
+        return view('posts.index');
     }
 
     /**
@@ -81,17 +81,5 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-
-
-    // all pages
-
-
-    public function indexOne()
-    {
-        $posts = DB::select(' select * from array ');
-        return view('pages.three',['posts'=>$posts]);
     }
 }
