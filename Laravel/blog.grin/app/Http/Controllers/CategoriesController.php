@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-use App\Post;
 
-class AdminPostController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +13,7 @@ class AdminPostController extends Controller
      */
     public function index()
     {
-        $posts = DB::select(' select * from post ');
-        return view('posts.index',['posts'=>$posts]);
+        return view('admin.categories.index');
     }
 
     /**
@@ -38,10 +34,7 @@ class AdminPostController extends Controller
      */
     public function store(Request $request)
     {
-        Post::create($request->all());
-
-        return redirect()->route('posts.index',['id = 1']);
-
+        //
     }
 
     /**

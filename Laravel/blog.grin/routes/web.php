@@ -1,35 +1,35 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-
+//all pages
 
 Route::get('/', function () {
     return view('site.index');
 });
 
-//all pages
+
+
+//Admin-Panel
+
+Route::resource('admin-panel','DashPosts');
 
 
 
 
 
-Route::get('/four', 'TaskController@Index' )->name('task.index');
+Auth::routes();
 
-Route::get('tasks/create', 'TaskController@create' )->name('task.create');
-
-Route::post('tasks/store', 'TaskController@store' )->name('tasks.store');
+Route::get('/home', 'HomeController@index')->name('home');
 
 
+Route::get('/cat', 'CategoriesController@index');
 
-Route::get('/posts', 'Admin\AdminPostController@index');
+
+//
+
+
+
+Route::get('/uploadfile','UploadController@index');
+Route::post('/uploadfile','UploadController@showUploadFile');
+
 

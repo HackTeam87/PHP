@@ -8,17 +8,9 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Hello Grin</h1>
-
-{{--@foreach ($posts as $post)--}}
-
-    {{--<span class="short" > {!! $post->title !!}</span>--}}
-    {{--<span class="short" > {!! $post->short_text !!}</span>--}}
-    {{--<span class="short" > {!! $post->text !!}</span>--}}
-
-
-
-{{--@endforeach--}}
-
+@extends('admin.admin-index')
+@section('content')
+    <h3>Hello Grin</h3>
+@endsection
 </body>
 </html>
