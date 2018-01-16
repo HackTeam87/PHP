@@ -2,70 +2,67 @@
 
 @section('title','Добавить пост')
 
+@yield('header')
+
+@section('breadcrumb')
+
+    <ol class="breadcrumb">
+        <li><a href="{{url('admin-panel/')}}">Home</a></li>
+        <li><a href="{{url('admin-panel/create')}}">Posts</a></li>
+        <li class="prime-text">HELLO</li>
+        <li><a class="navbar-brand" href="http://localhost/admin-panel/">
+                <img alt="Brand" src="http://localhost/uploads/logo/logo2.png" width="70px">
+            </a>
+        </li>
+    </ol>
+
+@show
+
+
 @section('content')
 
-    <div class="col-md-6">
-
-        {!! Form::model($post,array('route' => array('admin-panel.update',$post->id ,'enctype' => 'multipart/form-data'),'method' => 'PUT','enctype' => 'multipart/form-data')) !!}
-        {{--{!! Form::model(['route'=>'admin-panel.update',$post->id ,'enctype' => 'multipart/form-data']) !!}--}}
-
-        <div class="form-group">
-            <div class="col-md-3">
-                {!! Form::label('title','Заголовок') !!}
-            </div>
-            <div class="col-md-7">
-                {!! Form::text('title',null,['class'=>'form-control']) !!}
+    @if (Session::get('message') != Null)
+        <div class="row">
+            <div class="col-md-12 centered prime-text">
+                {{ Session::get('message') }}
             </div>
         </div>
+        </div>
+    @endif
 
-        <div class="form-group">
-            <div class="col-md-3">
-                {!! Form::label('slug','Ярлык') !!}
-            </div>
-            <div class="col-md-7">
-                {!! Form::text('slug',null,['class'=>'form-control']) !!}
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="input-group ">
+                    {!! Form::model($post,array('route' => array('admin-panel.update',$post->id ),'files' => true,'method' => 'PUT')) !!}
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            {!! Form::submit('send form',['class'=>'btn btn-primary btn-sm buttonText']) !!}
+                        </div>
+                    </div>
+
+                    {!! Form::text('title',null,['class'=>'form-control','placeholder' => 'Заголовок']) !!}
+
+                    <select name="category_id" class="form-control prime-text">
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->title}} </option>
+                        @endforeach
+                    </select>
+
+                    {!! Form::text('slug',null,['class'=>'form-control','placeholder' => 'Ярлык']) !!}
+
+                    {!! Form::textarea('text',null,['class'=>'form-control ','placeholder' => 'Краткое Описание']) !!}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    {!! Form::label('text', 'Краткое Описание'); !!}
+                    <script>
+                        CKEDITOR.replace('text');
+                    </script>
+
+                    {!! Form::close() !!}
+                </div>
             </div>
         </div>
-
-
-        <div class="form-group">
-            <div class="col-md-3">
-                {!! Form::label('text','Текст поста ') !!}
-            </div>
-            <div class="col-md-7">
-                {!! Form::textarea('text',null,['class'=>'form-control']) !!}
-            </div>
-        </div>
-
-        <div class="form-group mymargin">
-            <div class="col-md-9 col-md-offset-3">
-                {!! Form::file('file', ['class'=>'waves-effect pink accent-4']) !!}
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-9 col-md-offset-3">
-                {!! Form::submit('Push',['class'=>'waves-effect waves-light btn']) !!}
-            </div>
-        </div>
-
-        {!! Form::close() !!}
     </div>
-
-
-
-    <style>
-        .form-group {
-            width: 100%;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .bigsize {
-            font-size: 200%;
-        }
-
-    </style>
 
 @endsection

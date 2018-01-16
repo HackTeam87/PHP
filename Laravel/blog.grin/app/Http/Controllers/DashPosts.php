@@ -3,16 +3,24 @@
 namespace App\Http\Controllers;
 
 
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Input;
+use phpDocumentor\Reflection\Types\Nullable;
 
 
 class DashPosts extends Controller
 {
+//    //Auth
+//
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
+
 
     //index
 
@@ -26,12 +34,15 @@ class DashPosts extends Controller
 
     public function create()
     {
-        $post = DB::table('posts')->paginate(2);
+        $post = Post::paginate(2);
 //       $post = Post::all();
 
-        return view('admin.pages.create',['post'=>$post]);
-    }
+        $categories = Category::all();
 
+
+
+        return view('admin.pages.create', ['post' => $post], ['categories' => $categories]);
+    }
 
 
     //store
@@ -42,13 +53,12 @@ class DashPosts extends Controller
         $destinationPath = 'uploads/blogImage';
 //        $filename = $file->getClientOriginalName();
         if (
-        $this->validate($request, ['file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048' ,])
-        ){
+        $this->validate($request, ['file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1048',])
+        ) {
             $filename = $file->store('uploads/blogImage');
-            $file->move($destinationPath,$filename);
+            $file->move($destinationPath, $filename);
 
         }
-
 
         $post = new Post();
 
@@ -56,13 +66,13 @@ class DashPosts extends Controller
         $post->slug = $request->slug;
         $post->text = $request->text;
         $post->video = $request->video;
+        $post->category_id = $request->category_id;
         $post->file = $filename;
 
         $post->save();
 
-        return redirect('admin-panel/create');
+        return redirect('admin-panel/create')->with('message', 'An Post has been added');
     }
-
 
     //show
 
@@ -79,40 +89,26 @@ class DashPosts extends Controller
     {
         $post = Post::find($id);
 
-        return view('admin.pages.edit')->withPost($post);
-    }
+        $categories = Category::all();
 
+        return view('admin.pages.edit',compact('categories'))->withPost($post);
+    }
 
     //update
 
     public function update(Request $request, $id)
     {
 
-        $file = $request->file('file');
-        $destinationPath = 'uploads/blogImage';
-
-        if (
-        $this->validate($request, ['file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048' ,])
-        ){
-            $filename = $file->store('uploads/blogImage');
-            $file->move($destinationPath,$filename);
-
-            echo '<h3>file uploaded ';
-        }
-
         $post = Post::find($id);
-
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->text = $request->text;
-        $post->file = $filename;
-
+        $post->category_id = $request->category_id;
         $post->save();
+        return redirect()->route('admin-panel.create', $post->id);
 
 
-        return redirect()->route('admin-panel.create',$post->id);
     }
-
 
     //destroy
 
@@ -122,18 +118,15 @@ class DashPosts extends Controller
 
         $post->delete();
 
-        return redirect()->route('admin-panel.create',$post->id);
+        return redirect()->route('admin-panel.create', $post->id);
     }
 
 
-//    public function upload ( Request $request)
-//    {
-//        if ($request-hasFile('file')) {
-//
-//            $request->file->store('public/upload');
-//            return 'yes';
-//        }
-//
-//        return$request->all();
-//    }
+    public function listByCategoryId($id)
+    {
+        $posts = Post::with('category')->where('id', $id)->get();
+        return view('posts.single')
+            ->with('posts', $posts);
+    }
+
 }

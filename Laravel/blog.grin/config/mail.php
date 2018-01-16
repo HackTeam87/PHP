@@ -88,6 +88,14 @@ return [
 
     'password' => env('MAIL_PASSWORD'),
 
+    // myconfig
+
+    'support' => env('MAIL_SUPPORT_ADDRESS'),
+//
+//    'mail_from' => env('MAIL_FROM_ADDRESS'),
+//
+//    'mail_from_user' => env('MAIL_FROM_NAME'),
+
     /*
     |--------------------------------------------------------------------------
     | Sendmail System Path

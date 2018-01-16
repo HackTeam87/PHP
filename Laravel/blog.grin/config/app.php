@@ -165,6 +165,18 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
 
+        //Facebook Socialite
+        Laravel\Socialite\SocialiteServiceProvider::class,
+
+
+        //IMG Avatar Gravatar
+        Creativeorange\Gravatar\GravatarServiceProvider::class,
+
+
+        //Flash massage
+        Laracasts\Flash\FlashServiceProvider::class,
+
+
         //HTML && FORMS dist
         Collective\Html\HtmlServiceProvider::class,
 
@@ -229,6 +241,13 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        //Facebook Socialite
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+
+        //Avatar
+        'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
 
 
         //HTML && FORMS dist

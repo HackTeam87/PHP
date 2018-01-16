@@ -2,207 +2,183 @@
 
 @section('title','Добавить пост')
 
+@yield('header')
+
+@section('breadcrumb')
+    <ol class="breadcrumb">
+
+        <li><a href="{{url('admin-panel/')}}">Home</a></li>
+        <li><a href="{{url('admin-panel/create')}}">Posts</a></li>
+        <li class="prime-text">HELLO</li>
+        <li><a class="navbar-brand" href="http://localhost/admin-panel/">
+                <img alt="Brand" src="http://localhost/uploads/logo/logo2.png" width="70px">
+            </a></li>
+
+    </ol>
+@show
+
+
 @section('content')
 
-    <div class="container">
 
-        <div class="col m6  mycontainer2">
+    @if (Session::get('message') != Null)
+        <div class="row">
+            <div class="col-md-12 centered prime-text">
+                {{ Session::get('message') }}
+            </div>
+        </div>
+    @endif
 
-            {!! Form::open(['route'=>'admin-panel.store','enctype' => 'multipart/form-data']) !!}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-11">
+                <div class="form-group">
 
-            <div class="form-group">
-                <div class="col-md-3">
-                    {!! Form::label('title','Заголовок') !!}
-                </div>
-                <div class="col-md-7">
-                    {!! Form::text('title',null,['class'=>'form-control']) !!}
+                    <div class="centered">
+                        <nav aria-label="Page navigation centered">
+                            {{ $post->links() }}
+                        </nav>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table ">
+
+                            <th class="prime-text">Заголовок</th>
+                            <th class="prime-text">Текст</th>
+                            <th class="prime-text">Изображение</th>
+                            <th class="prime-text">Управление</th>
+                            <th class="prime-text">Категория_LEN</th>
+
+                            @foreach($post as $item)
+
+                                <tr>
+
+                                    <td>{!! $item->title !!}</td>
+                                    <td>{!! $item->text !!}</td>
+                                    <td><img src="http://localhost/{!! $item->file !!}" alt="img" width="100px">
+                                    </td>
+
+
+                                    <td>
+                                        {{--Show--}}
+                                        <a title="Read article" href="{{ url('admin-panel/'.$item->id) }}"
+                                           class="btn btn-primary"><span class="fa fa-newspaper-o"></span></a>
+
+                                        {{--Edit--}}
+                                        <a title="Edit article" href="{{ url('admin-panel/'.$item->id.'/edit') }}"
+                                           class="btn btn-warning"><span class="fa fa-edit"></span></a>
+
+                                        {{--Delete--}}
+                                        <button title="Delete article" type="button" class="btn btn-danger"
+                                                data-toggle="modal" data-target="#delete_article_{{ $item->id  }}"><span
+                                                    class="fa fa-trash-o"></span></button>
+
+                                    </td>
+
+                                    <td>
+                                        @foreach($categories as $art)
+
+                                            {{ $art->title }}
+
+                                        @endforeach
+                                    </td>
+
+                                    @endforeach
+
+                                </tr>
+
+
+                        </table>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <div class="col-md-3">
-                    {!! Form::label('slug','Ярлык') !!}
-                </div>
-                <div class="col-md-7">
-                    {!! Form::text('slug',null,['class'=>'form-control']) !!}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-3">
-                    {!! Form::label('slug','Видео') !!}
-                </div>
-                <div class="col-md-7">
-                    {!! Form::text('video',null,['class'=>'form-control']) !!}
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="col-md-3">
-                    {!! Form::label('text','Текст поста ') !!}
-                </div>
-                <div class="col-md-7 ">
-                    {!! Form::textarea('text',null,['class'=>'form-control myform']) !!}
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                </div>
-            </div>
-
-            <div class="form-group mymargin">
-                <div class="col-md-9 col-md-offset-3">
-                    {!! Form::file('file', ['class'=>'waves-effect pink accent-4']) !!}
-                </div>
-            </div>
-
-
-            <div class="form-group mymargin">
-                <div class="col-md-9 col-md-offset-3">
-                    {!! Form::submit('store',['class'=>'waves-effect teal darken-3 btn']) !!}
-                </div>
-            </div>
-
-
-            <div class="form-group mymargin">
-                <div class="col-md-9 col-md-offset-3">
-                    <ul class="pagination centered">
-                        <li class="waves-effect">{{ $post->links() }}</li>
-                    </ul>
-                </div>
-            </div>
-            {!! Form::close() !!}
         </div>
 
-        <div class="col  m6  mycontainer">
 
-            <div class="form-group">
-
-                <table class="table">
-                    <th class="prime-text">Заголовок</th>
-                    <th class="prime-text">Дата</th>
-                    <th class="prime-text">Текст</th>
-                    <th class="prime-text">Изображение</th>
-                    <th class="prime-text">Видео</th>
-                    <th class="prime-text">Управление</th>
+        <div class="container">
+            <div class="col-md-12">
 
 
-                    @foreach($post as $item)
-                        <tr>
-                            <td>{!! $item->title !!}</td>
+                {{--<div class="input-group ">--}}
+                {!! Form::open(['route'=>'admin-panel.store','files' => true]) !!}
 
-                            <td> {{Carbon\Carbon::parse($item->created_at)->format('d/m/Y')}}</td>
+                <div class="row">
+                    <div class="col-md-1">
+                        {!! Form::submit('send form',['class'=>'btn btn-primary btn-sm buttonText']) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! Form::file('file', ['class'=>'filestyle btn btn-primary'],null) !!}
+                        <script>
+                            $(":file").filestyle();
+                        </script>
+                    </div>
+                </div>
 
-                            <td>{!! $item->text !!}</td>
+                {!! Form::text('title',null,['class'=>'form-control','placeholder' => 'Заголовок']) !!}
 
-                            <td><a href="http://127.0.0.1:8000/{!! $item->file !!}"><img class="responsive-img"
-                                                                                         src="http://127.0.0.1:8000/{!! $item->file !!}"
-                                                                                         alt="img" width="150px"></a>
-                            </td>
-
-                            <td>
-                                <div class="video-container">
-                                    <iframe width="560" height="315" src="{{$item->video}}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-                                </div>
-                            </td>
-
-
-                            <td>
-
-                                <div class="row myflex">
-
-                                    {{--Show--}}
-
-                                    <div class="col s3 mymargin">
-                                        <a href="{{ url('admin-panel/'.$item->id) }}"><i
-                                                    class=" waves-effect  purple lighten-2 btn material-icons ">web</i></a>
-                                    </div>
-
-                                    {{--Edit--}}
-
-                                    <div class="col s3 mymargin">
-                                        <a href="{{ url('admin-panel/'.$item->id.'/edit') }}"><i
-                                                    class=" waves-effect   deep-orange btn material-icons ">edit</i></a>
-                                    </div>
-
-                                    {{--Delete--}}
-
-                                    <div class="col s3 mymargin">
-                                        {{ Form::open(['method' => 'DELETE', 'route' => ['admin-panel.destroy', $item->id]]) }}
-                                        {{ Form::submit('delete', ['class' => ' waves-effect red accent-2 btn material-icons ']) }}
-                                        {{ Form::close() }}
-                                    </div>
-
-
-                                </div>
-
-                            </td>
-                        </tr>
-
+                <select name="category_id" class="form-control prime-text">
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->title}} </option>
                     @endforeach
-                </table>
+                </select>
 
+                {!! Form::text('slug',null,['class'=>'form-control','placeholder' => 'Ярлык']) !!}
+
+
+                {!! Form::text('video',null,['class'=>'form-control','placeholder' => 'Ютуб']) !!}
+
+                {!! Form::textarea('text',null,['class'=>'form-control ','placeholder' => 'Краткое Описание']) !!}
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                {!! Form::label('text', 'Краткое Описание'); !!}
+                <script>
+                    CKEDITOR.replace('text');
+                </script>
+
+                {!! Form::close() !!}
+
+                {{--</div>--}}
             </div>
-
-
         </div>
+
 
     </div>
 
+    </div>
 
-    <style>
+    {{--//modal--}}
 
-        .myform {
-            min-height: 140px;
-            max-width: 700px;
-            text-align: center;
-        }
+    @foreach($post as $item)
+        <div class="modal fade" id="delete_article_{{ $item->id  }}" tabindex="-1" role="dialog"
+             aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <form class="" action="{{ route('admin-panel.destroy', ['id' => $item->id]) }}" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-        .pagination {
-            font-size: 24px;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 1px;
-        }
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header bg-red">
+                            <h4 class="modal-title" id="mySmallModalLabel">Delete article</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
 
-        .centered {
-            text-align: center;
-        }
 
-        .myflex {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
-        }
+                        <div class="modal-body">
+                            Are you sure to delete article: <b>{{ $item->title }} </b>?
 
-        .form-group {
-            /*width: 50%;*/
-            /*display: inline-block;*/
-            margin-bottom: 15px;
-        }
-
-        .mycontainer {
-            color: #ffffff;
-            /*min-width: 660px;*/
-            width: auto;
-        }
-
-        .mycontainer2 {
-            background-color: whitesmoke;
-            /*min-width: 660px;*/
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-            width: auto;
-        }
-
-        .prime-text {
-            font-family: 'Cinzel', serif;
-            font-size: 22px;
-            letter-spacing: 1px;
-        }
-
-        body {
-            background-color: #0BA9F9;
-        }
-
-    </style>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ url('/') }}">
+                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close
+                                </button>
+                            </a>
+                            <button type="submit" class="btn btn-outline" title="Delete" value="delete">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    @endforeach
 
 @endsection
