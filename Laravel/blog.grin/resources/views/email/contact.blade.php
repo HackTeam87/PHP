@@ -11,8 +11,8 @@
         <li><a href="{{url('admin-panel/')}}">Home</a></li>
         <li><a href="{{url('admin-panel/create')}}">Posts</a></li>
         <li class="prime-text">HELLO</li>
-        <li><a class="navbar-brand" href="http://127.0.0.1:8000/admin-panel/">
-                <img alt="Brand" src="http://127.0.0.1:8000/uploads/logo/logo2.png" width="70px">
+        <li><a class="navbar-brand" href="http://localhost/admin-panel/">
+                <img alt="Brand" src="http://localhost/uploads/logo/logo2.png" width="70px">
             </a></li>
 
     </ol>

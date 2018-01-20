@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="{{asset('assets/admin/css/style.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Cinzel|Dancing+Script" rel="stylesheet">
 
+    <script src="{{asset('assets/js/jquery-3.2.1.js')}}"></script>
+    <script src="{{asset('assets/admin/js/bootstrap.js')}}"></script>
+    <script src="{{asset('assets/js/myapp.js')}}"></script>
+    <script src="{{asset('assets/admin/js/ckeditor/ckeditor.js')}}"></script>
+    <script src="{{asset('assets/admin/js/bootstrap-filestyle.js')}}"></script>
+
     <title>@yield('title')</title>
 </head>
 <body>
@@ -27,11 +33,12 @@
                 <div class="collapse navbar-collapse ">
                     <ul class="nav navbar-nav  ">
                         <li><a href="{{url('admin-panel/')}}">Home</a></li>
-                        {{--<li><a href="{{url('/profile/'.Auth::user()->name)}}">Users</a></li>--}}
-                        <li><a href="{{route('categories.create')}}">Categories</a></li>
-                        <li><a href="{{url('admin-panel/create')}}">Posts</a></li>
+                        <li><a href="{{route('categories.create')}}">Add_Category</a></li>
+                        <li><a href="{{url('admin-panel/create')}}">Add_Atricle</a></li>
+                        <li><a href="{{url('http://blog-lara/articles')}}">Articles_By_Category</a></li>
                         <li><a href="{{route('contact.store')}}">E-mail</a></li>
                     </ul>
+
 
 
                     <!-- Right Side Of Navbar -->
@@ -41,26 +48,10 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                            <li>
+                                <a href="{{('/profile/'.Auth::user()->name)}}">
+                                    {{ Auth::user()->name }}
                                 </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-                                    </li>
-
-                                       <li> <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                            <li><h2>hi grin</h2></li>
-                                        </form>
-                                    </li>
-                                </ul>
                             </li>
                         @endguest
                     </ul>
@@ -70,10 +61,10 @@
                     <ol class="breadcrumb">
 
                         <li ><a href="{{url('admin-panel/')}}">Home</a></li>
-                        <li><a href="{{url('admin-panel/create')}}">Posts</a></li>
+                        <li><a href="{{url('admin-panel/create')}}">Articles</a></li>
                         <li class="prime-text">HELLO</li>
-                        <li><a class="navbar-brand" href="http://127.0.0.1:8000/admin-panel/">
-                                <img alt="Brand" src="http://127.0.0.1:8000/uploads/logo/logo2.png" width="70px">
+                        <li><a class="navbar-brand" href="http://localhost/admin-panel/">
+                                <img alt="Brand" src="http://localhost/uploads/logo/logo2.png" width="70px">
                             </a></li>
 
                     </ol>
@@ -99,13 +90,6 @@
     @endif
 @show
 @yield('content')
-
-{{--//scripts--}}
-<script src="{{asset('assets/js/jquery-3.2.1.js')}}"></script>
-<script src="{{asset('assets/js/myapp.js')}}"></script>
-<script src="{{asset('assets/admin/js/bootstrap.js')}}"></script>
-<script src="{{asset('assets/admin/js/bootstrap-filestyle.js')}}"></script>
-<script src="{{asset('assets/admin/js/ckeditor/ckeditor.js')}}"></script>
 
 </body>
 </html>

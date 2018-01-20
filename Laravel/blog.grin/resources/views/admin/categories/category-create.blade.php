@@ -44,7 +44,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="centered">
+                <div class="centered ">
                     <nav aria-label="Page navigation centered">
                         {{ $categories->links() }}
                     </nav>
@@ -53,21 +53,17 @@
                     <table class="table">
 
                         <th>ID</th>
-                        <th>TITLE</th>
-                        {{--<th>CatLen</th>--}}
-                        {{--<th>SLUG</th>--}}
-                        <th>Управление</th>
+                        <th>Title</th>
+                        <th>Slug</th>
+                        <th>Count</th>
+                        <th>Control</th>
                         @foreach($categories as $cat)
                             <tr>
 
                                 <td>{!! $cat->id !!}</td>
                                 <td>{!! $cat->title !!}</td>
-                                {{--<td>--}}
-                                    {{--@foreach($categories as $category)--}}
-                                        {{--({{ $category->posts->count() }})--}}
-                                    {{--@endforeach--}}
-                                {{--</td>--}}
-                                {{--<td>{!! $cat->slug !!}</td>--}}
+                                <td>{!! $cat->slug !!}</td>
+                                <td>{{$cat->posts->count()}}</td>
 
 
                                 <td>
@@ -97,6 +93,8 @@
 
                 {!! Form::text('title',null,['class'=>'form-control','placeholder' => 'Категория']) !!}
 
+                {!! Form::text('slug',null,['class'=>'form-control','placeholder' => 'Slug']) !!}
+
 
                 {!! Form::close() !!}
                 {{--</div>--}}
@@ -114,7 +112,7 @@
              aria-labelledby="mySmallModalLabel" aria-hidden="true">
             <form class="" action="{{ route('categories.destroy', ['id' => $cat->id]) }}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                {{ csrf_field() }}
 
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">

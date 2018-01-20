@@ -92,8 +92,37 @@ body {
     font-size: 20px;
     color: #ffffff;
     letter-spacing: 1px;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+    background-color: orangered;
 
 }
+
+/*ArticlesPages*/
+
+
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.article-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 55px;
+    letter-spacing: 3px;
+    color: green;
+}
+
+.article-title:hover {
+    text-decoration: none;
+}
+
+
+
+
 
 
 /*Admin-Show*/

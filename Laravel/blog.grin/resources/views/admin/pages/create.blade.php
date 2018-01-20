@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
 
         <li><a href="{{url('admin-panel/')}}">Home</a></li>
-        <li><a href="{{url('admin-panel/create')}}">Posts</a></li>
+        <li><a href="{{url('admin-panel/create')}}">Articles</a></li>
         <li class="prime-text">HELLO</li>
         <li><a class="navbar-brand" href="http://localhost/admin-panel/">
                 <img alt="Brand" src="http://localhost/uploads/logo/logo2.png" width="70px">
@@ -46,103 +46,91 @@
                             <th class="prime-text">Заголовок</th>
                             <th class="prime-text">Текст</th>
                             <th class="prime-text">Изображение</th>
-                            <th class="prime-text">Управление</th>
-                            <th class="prime-text">Категория_LEN</th>
 
                             @foreach($post as $item)
+                                <div class="container-fluid">
+                                    <tr>
 
-                                <tr>
-
-                                    <td>{!! $item->title !!}</td>
-                                    <td>{!! $item->text !!}</td>
-                                    <td><img src="http://localhost/{!! $item->file !!}" alt="img" width="100px">
-                                    </td>
-
-
-                                    <td>
-                                        {{--Show--}}
-                                        <a title="Read article" href="{{ url('admin-panel/'.$item->id) }}"
-                                           class="btn btn-primary"><span class="fa fa-newspaper-o"></span></a>
-
-                                        {{--Edit--}}
-                                        <a title="Edit article" href="{{ url('admin-panel/'.$item->id.'/edit') }}"
-                                           class="btn btn-warning"><span class="fa fa-edit"></span></a>
-
-                                        {{--Delete--}}
-                                        <button title="Delete article" type="button" class="btn btn-danger"
-                                                data-toggle="modal" data-target="#delete_article_{{ $item->id  }}"><span
-                                                    class="fa fa-trash-o"></span></button>
-
-                                    </td>
-
-                                    <td>
-                                        @foreach($categories as $art)
-
-                                            {{ $art->title }}
-
-                                        @endforeach
-                                    </td>
-
-                                    @endforeach
-
-                                </tr>
+                                        <td class="col-md-1">{!! $item->title !!}</td>
+                                        <td class="col-md-5">{!! $item->text !!}</td>
+                                        <td class="col-md-1">
+                                            <img src="http://localhost/{!! $item->file !!}" alt="img" width="100px">
+                                        </td>
 
 
+                                       <tr> <td class="col-md-3">
+                                            {{--Show--}}
+                                            <a title="Read article" href="{{ url('admin-panel/'.$item->id) }}"
+                                               class="btn btn-primary"><span class="fa fa-newspaper-o"></span></a>
+
+                                            {{--Edit--}}
+                                            <a title="Edit article" href="{{ url('admin-panel/'.$item->id.'/edit') }}"
+                                               class="btn btn-warning"><span class="fa fa-edit"></span></a>
+
+                                            {{--Delete--}}
+                                            <button title="Delete article" type="button" class="btn btn-danger"
+                                                    data-toggle="modal"
+                                                    data-target="#delete_article_{{ $item->id  }}"><span
+                                                        class="fa fa-trash-o"></span></button>
+
+                                        </td></tr>
+
+                                    </tr>
+                                </div>
+                            @endforeach
                         </table>
                     </div>
                 </div>
             </div>
-        </div>
 
 
-        <div class="container">
-            <div class="col-md-12">
+            <div class="container">
+                <div class="col-md-12">
 
 
-                {{--<div class="input-group ">--}}
-                {!! Form::open(['route'=>'admin-panel.store','files' => true]) !!}
+                    {{--<div class="input-group ">--}}
+                    {!! Form::open(['route'=>'admin-panel.store','files' => true]) !!}
+                    {{ csrf_field() }}
 
-                <div class="row">
-                    <div class="col-md-1">
-                        {!! Form::submit('send form',['class'=>'btn btn-primary btn-sm buttonText']) !!}
+                    <div class="row">
+                        <div class="col-md-1">
+                            {!! Form::submit('send form',['class'=>'btn btn-primary btn-sm buttonText']) !!}
+                        </div>
+                        <div class="col-md-3">
+                            {{--{!! Form::file('file', null,['class'=>'filestyle btn btn-primary']) !!}--}}
+                            <input type="file" name="file" class="filestyle btn btn-primary">
+                            <script>
+                                $(":file").filestyle();
+                            </script>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        {!! Form::file('file', ['class'=>'filestyle btn btn-primary'],null) !!}
-                        <script>
-                            $(":file").filestyle();
-                        </script>
-                    </div>
+
+                    {!! Form::text('title',null,['class'=>'form-control','placeholder' => 'Заголовок']) !!}
+
+
+
+                    {!! Form::text('video',null,['class'=>'form-control','placeholder' => 'Ютуб']) !!}
+
+                    <select name="category_id" class="form-control prime-text">
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->title}} </option>
+                        @endforeach
+                    </select>
+
+                    {!! Form::textarea('text',null,['class'=>'form-control ','placeholder' => 'Краткое Описание']) !!}
+
+                    {!! Form::label('text', 'Краткое Описание'); !!}
+                    <script>
+                        CKEDITOR.replace('text');
+                    </script>
+
+                    {!! Form::close() !!}
+
+                    {{--</div>--}}
                 </div>
-
-                {!! Form::text('title',null,['class'=>'form-control','placeholder' => 'Заголовок']) !!}
-
-                <select name="category_id" class="form-control prime-text">
-                    @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->title}} </option>
-                    @endforeach
-                </select>
-
-                {!! Form::text('slug',null,['class'=>'form-control','placeholder' => 'Ярлык']) !!}
-
-
-                {!! Form::text('video',null,['class'=>'form-control','placeholder' => 'Ютуб']) !!}
-
-                {!! Form::textarea('text',null,['class'=>'form-control ','placeholder' => 'Краткое Описание']) !!}
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                {!! Form::label('text', 'Краткое Описание'); !!}
-                <script>
-                    CKEDITOR.replace('text');
-                </script>
-
-                {!! Form::close() !!}
-
-                {{--</div>--}}
             </div>
+
         </div>
-
-
-    </div>
-
     </div>
 
     {{--//modal--}}

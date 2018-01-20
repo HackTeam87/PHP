@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidateForm2Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Post;
@@ -29,7 +30,7 @@ class CategoriesController extends Controller
     public function create()
     {
 
-        $categories = DB::table('categories')->paginate(2);
+        $categories = Category::paginate(3);
 
         return view('admin.categories.category-create',['categories' => $categories]);
     }
@@ -37,13 +38,17 @@ class CategoriesController extends Controller
     /**
      * Store
      */
-    public function store(Request $request)
+    public function store(ValidateForm2Request $request)
     {
+
         $cat = new Category();
 
         $cat->title = $request->title;
+        $cat->slug = $request->slug;
 
         $cat->save();
+
+//        Category::create($request->all());
 
         return redirect('categories/create')->with('message','An Category has been added');
     }

@@ -53,4 +53,31 @@
 
 
 
+    <style>
+
+        blockquote {
+            background-color: lightgray;
+            border-radius: 8px;
+        }
+
+        span {
+            color: #ffffff;
+        }
+
+        .title {
+            font-size: 24px;
+            font-family: 'Dancing Script', cursive;
+            letter-spacing: 2px;
+
+        }
+
+        .centered {
+            text-align: center;
+        }
+
+        .text {
+            font-size: 18px;
+            font-family: 'Cinzel', serif;
+        }
+    </style>
 @endsection

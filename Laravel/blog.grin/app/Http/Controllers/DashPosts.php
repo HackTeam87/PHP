@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\ValidateFormRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Post;
@@ -14,12 +15,6 @@ use phpDocumentor\Reflection\Types\Nullable;
 
 class DashPosts extends Controller
 {
-//    //Auth
-//
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
 
 
     //index
@@ -39,37 +34,36 @@ class DashPosts extends Controller
 
         $categories = Category::all();
 
-
-
-        return view('admin.pages.create', ['post' => $post], ['categories' => $categories]);
+        return view('admin.pages.create', ['post' => $post])->with('categories', $categories);
     }
 
 
     //store
 
-    public function store(Request $request)
+    public function store(ValidateFormRequest $request)
     {
+
+
         $file = $request->file('file');
         $destinationPath = 'uploads/blogImage';
-//        $filename = $file->getClientOriginalName();
-        if (
-        $this->validate($request, ['file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1048',])
-        ) {
-            $filename = $file->store('uploads/blogImage');
-            $file->move($destinationPath, $filename);
+//        $filename = $destinationPath.'/'.$file->getClientOriginalName();
+        $filename = $file->store('uploads/blogImage');
+        $file->move($destinationPath, $filename);
 
-        }
 
         $post = new Post();
 
         $post->title = $request->title;
-        $post->slug = $request->slug;
         $post->text = $request->text;
         $post->video = $request->video;
         $post->category_id = $request->category_id;
         $post->file = $filename;
 
+
         $post->save();
+
+
+//        Post::create($request->all());
 
         return redirect('admin-panel/create')->with('message', 'An Post has been added');
     }
@@ -91,7 +85,7 @@ class DashPosts extends Controller
 
         $categories = Category::all();
 
-        return view('admin.pages.edit',compact('categories'))->withPost($post);
+        return view('admin.pages.edit', compact('categories'))->withPost($post);
     }
 
     //update
@@ -101,7 +95,6 @@ class DashPosts extends Controller
 
         $post = Post::find($id);
         $post->title = $request->title;
-        $post->slug = $request->slug;
         $post->text = $request->text;
         $post->category_id = $request->category_id;
         $post->save();
