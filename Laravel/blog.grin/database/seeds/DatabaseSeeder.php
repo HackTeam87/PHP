@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Post;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+
+        Post::create(
+            [
+                'title' => 'Blog Post',
+                'text' => 'Article Text Article Text Article Text'
+            ]);
+//         $this->call(PostsTableSeeder::class);
     }
 }

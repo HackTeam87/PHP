@@ -15,6 +15,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 //       Schema::defaultStringLenght(191);
+
+//        $this->registerPolicies();
+//        Gate::define('admin-only', function ($user) {
+//            if($user->isAdmin)
+//            {
+//                return true;
+//            }
+//            return false;
+//        });
+
     }
 
     /**

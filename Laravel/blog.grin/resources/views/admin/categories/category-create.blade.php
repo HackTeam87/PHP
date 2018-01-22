@@ -63,7 +63,7 @@
                                 <td>{!! $cat->id !!}</td>
                                 <td>{!! $cat->title !!}</td>
                                 <td>{!! $cat->slug !!}</td>
-                                <td>{{$cat->posts->count()}}</td>
+                                <td>{!! $cat->posts->count() !!}</td>
 
 
                                 <td>

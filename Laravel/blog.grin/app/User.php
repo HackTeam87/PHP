@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Cache;
 
 class User extends Authenticatable
 {
@@ -57,6 +58,12 @@ class User extends Authenticatable
     public function removeProfile($profile)
     {
         return $this->profiles()->detach($profile);
+    }
+
+
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
     }
 
 

@@ -62,11 +62,16 @@ class AuthController extends Controller
             }
         }
 
+
+
         //Вход на сайт
         Auth::login($user,true);
 
         //Перенаправление
+
         return redirect($this->redirectPath());
     }
+
+
 
 }

@@ -20,7 +20,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $serega = Post::all();
-        return view('admin.pages.test',['serega' => $serega]);
+        if(Auth::user()->isAdmin) {
+            return view('admin.index');
+        }
+        return view('home');
     }
 }

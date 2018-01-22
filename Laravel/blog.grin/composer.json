@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "arrilot/laravel-widgets": "^3.9",
         "creativeorange/gravatar": "^1.0",
         "fideloper/proxy": "~3.3",
         "laracasts/flash": "^3.0",
