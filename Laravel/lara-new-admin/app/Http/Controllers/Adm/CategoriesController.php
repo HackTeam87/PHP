@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Category;
+use App\Event;
 
 class CategoriesController extends Controller
 {
@@ -17,9 +18,8 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::all();
-
-
-        return view('administrator.categories.index')
+        $calen = Event::all();
+        return view('administrator.categories.index',['calen'=>$calen])
             ->with('categories', $categories);
     }
 
@@ -32,8 +32,9 @@ class CategoriesController extends Controller
     {
 
         $categories = Category::paginate(3);
+        $calen = Event::all();
 
-        return view('administrator.categories.category-create',['categories' => $categories]);
+        return view('administrator.categories.category-create',['categories' => $categories],compact('calen'));
     }
 
     /**
@@ -50,8 +51,8 @@ class CategoriesController extends Controller
         $cat->save();
 
 //        Category::create($request->all());
-
-        return redirect('administrator/categories/create')->with('message','An Category has been added');
+        $mtitle = 'An Category'.' '.$request->title.' '.'has been added';
+        return redirect('adm/categories/create')->with(['message'=>$mtitle]);
     }
 
     /**
@@ -87,6 +88,6 @@ class CategoriesController extends Controller
 
         $cat->delete();
 
-        return redirect()->route('categories.create',$cat->id);
+        return redirect()->route('categories.create',$cat->id)->with('message','Category deleted');;
     }
 }

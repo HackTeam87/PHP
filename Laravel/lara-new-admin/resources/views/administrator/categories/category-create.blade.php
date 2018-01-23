@@ -5,6 +5,7 @@
 
 
 @section('content')
+    <link rel="stylesheet" href="{{ asset('cms/css/style.css') }}">
 
     @if (Session::get('message') != Null)
         <div class="row">
@@ -12,14 +13,13 @@
                 {{ Session::get('message') }}
             </div>
         </div>
-        </div>
     @endif
 
 
     <div class="container">
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <div class="centered ">
                     <nav aria-label="Page navigation centered">
                         {{ $categories->links() }}
@@ -57,7 +57,7 @@
         </div>
 
         <div class="container">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 {{--<div class="input-group ">--}}
                 {!! Form::open(['route'=>'categories.store','files' => true,'enctype' => 'multipart/form-data']) !!}
 

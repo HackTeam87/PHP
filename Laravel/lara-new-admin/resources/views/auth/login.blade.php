@@ -1,4 +1,4 @@
-@extends('admin.admin-index')
+@extends('layouts.cms.admin')
 @section('header')
 
 @endsection

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  {{--<title>{{ config('app.name', 'Laravel Dashboard') }}</title>--}}
+  <title>{{ config('app.name', 'Laravel Dashboard') }}</title>
     <title></title>
   
   <!-- Tell the browser to be responsive to screen width -->
@@ -40,7 +40,6 @@
         <section class="content-header">
           <h1>
             Dashboard
-            <small>Version 1.0</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -71,12 +70,12 @@
       <!-- /.content-wrapper -->
 
       <footer class="main-footer">
-        {{--@include('layouts.cms._footer')--}}
+        @include('layouts.cms._footer')
       </footer>
 
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
-        {{--@include('layouts.cms._control')--}}
+        @include('layouts.cms._control')
       </aside>
       <!-- /.control-sidebar -->
       <!-- Add the sidebar's background. This div must be placed

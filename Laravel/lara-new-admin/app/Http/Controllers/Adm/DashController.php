@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\User;
+use App\Event;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Input;
@@ -22,7 +23,8 @@ class DashController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('administrator.posts.start')->with('users', $users);;
+        $calen = Event::all();
+        return view('administrator.posts.start',compact('calen'))->with('users', $users);
     }
 
 
@@ -35,8 +37,8 @@ class DashController extends Controller
 
         $categories = Category::all();
 
-
-        return view('administrator.posts.create', ['post' => $post])->with('categories', $categories);
+        $calen = Event::all();
+        return view('administrator.posts.create',compact('calen'), ['post' => $post])->with('categories', $categories);
     }
 
 
@@ -66,8 +68,9 @@ class DashController extends Controller
 
 
 //        Post::create($request->all());
-
-        return redirect('administrator/create')->with('message', 'An Post has been added');
+        $calen = Event::all();
+        $mtitle = 'An Post'.' '.$request->title.' '.'has been added';
+        return redirect('administrator/create')->with(['message'=>$mtitle],compact('calen'));
     }
 
     //show
@@ -76,7 +79,8 @@ class DashController extends Controller
     {
         $post = Post::find($id);
 
-        return view('administrator.posts.show')->withPost($post);
+        $calen = Event::all();
+        return view('administrator.posts.show',compact('calen'))->withPost($post);
     }
 
     //edit
@@ -87,7 +91,9 @@ class DashController extends Controller
 
         $categories = Category::all();
 
-        return view('administrator.posts.edit', compact('categories'))->withPost($post);
+        $calen = Event::all();
+
+        return view('administrator.posts.edit', compact('categories'),compact('calen'))->withPost($post);
     }
 
     //update
@@ -100,7 +106,10 @@ class DashController extends Controller
         $post->text = $request->text;
         $post->category_id = $request->category_id;
         $post->save();
-        return redirect()->route('administrator.create', $post->id);
+
+        $calen = Event::all();
+        $mtitle = 'An Post'.' '.$request->title.' '.'has been updated';
+        return redirect()->route('administrator.create', $post->id)->with(compact('calen'),['message'=>$mtitle]);
 
 
     }

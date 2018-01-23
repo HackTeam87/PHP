@@ -5,18 +5,41 @@
 
 
     <div class="flex-center position-ref full-height">
-        <div class="content">
-            <div class="links">
-                @foreach($categories->posts as $post)
-                    <a href="{{ route('post', [$categories->slug, $post->id]) }}" class="article-title">
+        <div class="container">
 
-                        {{ $post->title }}
+            <table class="table">
+                <tr>
+                    <th class="prime-text">Id</th>
+                    <th class="prime-text">Title</th>
+                    <th class="prime-text">Date</th>
+                </tr>
+            </table>
 
-                    </a>
-                    <br>
-                @endforeach
+            @foreach($categories->posts as $post)
+                <table class="table">
 
-            </div>
+                    <tr>
+                        <td>
+                            <a href="{{ route('post', [$categories->slug, $post->id]) }}">
+                                {{ $post->id }}
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="{{ route('post', [$categories->slug, $post->id]) }}">
+                                {{ $post->title }}
+                            </a>
+
+                        </td>
+
+                        <td>
+                            <span class="date">{!! Carbon\Carbon::parse($post->created_at)->format('/d/m/Y H:i:s') !!}</span>
+                        </td>
+                    </tr>
+
+                </table>
+            @endforeach
+
         </div>
     </div>
 

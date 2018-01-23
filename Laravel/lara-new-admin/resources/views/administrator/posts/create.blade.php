@@ -70,7 +70,8 @@
                                             <button title="Delete article" type="button" class="btn btn-danger"
                                                     data-toggle="modal"
                                                     data-target="#delete_article_{{ $item->id  }}"><span
-                                                        class="fa fa-trash-o"></span></button>
+                                                        class="fa fa-trash-o"></span>
+                                            </button>
 
                                         </td>
                                     </tr>

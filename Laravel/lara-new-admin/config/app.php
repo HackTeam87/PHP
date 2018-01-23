@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Admin-Panel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +165,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Arrilot\Widgets\ServiceProvider::class,
 
+        //Calendar
+        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+
 
         //Facebook Socialite
         Laravel\Socialite\SocialiteServiceProvider::class,
@@ -242,6 +245,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        //Calendar
+        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
 
 
         //Widgets

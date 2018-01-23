@@ -92,9 +92,7 @@ body {
     letter-spacing: 1px;
 }
 
-/*.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{*/
-    /*background-color: orangered;*/
-/*}*/
+
 
 /*ArticlesPages*/
 
@@ -106,7 +104,6 @@ body {
 
 .article-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 55px;
     letter-spacing: 3px;
     color: green;
 }

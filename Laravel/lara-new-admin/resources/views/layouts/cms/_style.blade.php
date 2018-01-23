@@ -29,3 +29,6 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   
   {{--{!! Html::style('/css/select2.min.css') !!}--}}
+
+  {{--//Calendar--}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>

@@ -1,10 +1,4 @@
 <?php
-//all pages
-Route::get('/', function () {
-        return view('site.index');
-});
-
-
 
 Auth::routes();
 
@@ -37,5 +31,22 @@ Route::group(['middleware' => 'auth'], function () {
 //Facebook Social
 Route::get('facebook/auth', 'AuthFacebook\AuthController@redirectToProvider_facebook');
 Route::get('facebook/auth/callback', 'AuthFacebook\AuthController@handleToProviderCallback_facebook');
+
+
+//all pages
+Route::get('/', function () {
+    return view('site.index');
+});
+
+//calendars
+//Route::get('/calendar', function () {
+//    return view('administrator.calendar.date');
+//});
+
+Route::resource('adm/calendar', 'Adm\EventController');
+
+//Route::get('adm/calendar', 'Adm\EventController@index')->name('calendar');
+//Route::post('adm/calendar', 'Adm\EventController@store')->name('calendar.store');
+//Route::post('adm/calendar', 'Adm\EventController@destroy')->name('calendar.destroy');
 
 
