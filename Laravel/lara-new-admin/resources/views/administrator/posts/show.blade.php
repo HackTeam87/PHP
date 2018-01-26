@@ -17,8 +17,8 @@
 
             <div class="col-md-4">
                 <span>
-                    <a href="http://localhost/{!! $post->file !!}">
-                        <img class="responsive-img" src="http://localhost/{!! $post->file !!}" alt="img" width="350px">
+                    <a href="{!!$_SERVER['SERVER_ADDR']  !!}/{!! $post->file !!}">
+                        <img class="responsive-img" src="{!!$_SERVER['SERVER_ADDR']  !!}/{!! $post->file !!}" alt="img" width="350px">
                     </a>
                 </span>
             </div>

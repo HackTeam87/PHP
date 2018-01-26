@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="input-group ">
-                    {!! Form::model($post,array('route' => array('administrator.update',$post->id ),'files' => true,'method' => 'PUT')) !!}
+                    {!! Form::model($post,array('route' => array('dash.update',$post->id ),'files' => true,'method' => 'PUT')) !!}
 
                     {!! Form::submit('send form',['class'=>'btn btn-primary btn-sm buttonText']) !!}
 

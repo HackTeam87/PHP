@@ -1,32 +1,38 @@
 <?php
 
 Auth::routes();
+//Admin-Panel-Prefix
+    Route::prefix('adm')->group(function () {
 
 //Admin-Panel
-Route::group(['middleware' => 'auth'], function () {
-    //AdminPost
+        Route::group(['middleware' => 'auth'], function () {
+            //AdminPost
 //    Route::resource('admin-panel', 'DashPosts');
-    Route::resource('administrator', 'Adm\DashController');
-    //AdminCategory
-    Route::resource('adm/categories', 'Adm\CategoriesController');
+            Route::resource('dash', 'Adm\DashController');
+            //AdminCategory
+            Route::resource('/categories', 'Adm\CategoriesController');
 
-    //ArticlesControllers
-    Route::get('adm/article/', 'Adm\PagesController@index')->name('article');;
-    Route::get('adm/articles/{category}', 'Adm\PagesController@category')->name('category');
-    Route::get('adm/articles/{category}/{post}', 'Adm\PagesController@post')->name('post');
+            //ArticlesControllers
+            Route::get('/article/', 'Adm\PagesController@index')->name('article');;
+            Route::get('/articles/{category}', 'Adm\PagesController@category')->name('category');
+            Route::get('/articles/{category}/{post}', 'Adm\PagesController@post')->name('post');
 
-    //Email
-    Route::get('contact', 'ContactController@create')->name('contact.create');
-    Route::post('contact', 'ContactController@store')->name('contact.store');
-    //Profile
-    Route::get('profile/{username}', [
-        'as' => '{username}',
-        'uses' => 'ProfileController@show',
-
-    ]);
+            //Calendar
+            Route::resource('/calendar', 'Adm\EventController');
 
 
-});
+            //Profile
+            Route::get('profile/{username}', [
+                'as' => '{username}',
+                'uses' => 'ProfileController@show',
+
+            ]);
+        });
+    });
+
+//Email
+Route::get('contact', 'ContactController@create')->name('contact.create');
+Route::post('contact', 'ContactController@store')->name('contact.store');
 
 //Facebook Social
 Route::get('facebook/auth', 'AuthFacebook\AuthController@redirectToProvider_facebook');
@@ -43,7 +49,7 @@ Route::get('/', function () {
 //    return view('administrator.calendar.date');
 //});
 
-Route::resource('adm/calendar', 'Adm\EventController');
+
 
 //Route::get('adm/calendar', 'Adm\EventController@index')->name('calendar');
 //Route::post('adm/calendar', 'Adm\EventController@store')->name('calendar.store');

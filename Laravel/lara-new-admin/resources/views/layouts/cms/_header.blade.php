@@ -1,5 +1,5 @@
 <!-- Logo -->
-        <a href="{{ url('/administrator') }}" class="logo">
+        <a href="{{ url('/adm/dash') }}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>{{ config('app.name', 'Janus') }}</b></span>
           <!-- logo for regular state and mobile devices -->

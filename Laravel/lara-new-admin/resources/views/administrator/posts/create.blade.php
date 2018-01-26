@@ -37,7 +37,7 @@
 
                     </div>
 
-
+{{--table--}}
                     <div class="table-responsive">
                         <table class="table ">
 
@@ -52,18 +52,18 @@
                                         <td class="col-md-1">{!! $item->title !!}</td>
                                         <td class="col-md-5">{!! $item->text !!}</td>
                                         <td class="col-md-1">
-                                            <img src="http://localhost/{!! $item->file !!}" alt="img" width="100px">
+                                            <img src="{!!$_SERVER['SERVER_ADDR']  !!}/{!! $item->file !!}" alt="img" width="100px">
                                         </td>
 
 
                                     <tr>
                                         <td class="col-md-3">
                                             {{--Show--}}
-                                            <a title="Read article" href="{{ url('administrator/'.$item->id) }}"
+                                            <a title="Read article" href="{{ url('adm/dash/'.$item->id) }}"
                                                class="btn btn-primary"><span class="fa fa-newspaper-o"></span></a>
 
                                             {{--Edit--}}
-                                            <a title="Edit article" href="{{ url('administrator/'.$item->id.'/edit') }}"
+                                            <a title="Edit article" href="{{ url('adm/dash/'.$item->id.'/edit') }}"
                                                class="btn btn-warning"><span class="fa fa-edit"></span></a>
 
                                             {{--Delete--}}
@@ -84,14 +84,14 @@
                 </div>
             </div>
 
-
+{{--//form--}}
             <div class="container">
 
                 <div class="col-md-10">
 
 
                     <div class="input-group ">
-                        {!! Form::open(['route'=>'administrator.store','files' => true]) !!}
+                        {!! Form::open(['route'=>'dash.store','files' => true]) !!}
                         {{ csrf_field() }}
 
                         <div class="row">
@@ -141,7 +141,7 @@
     @foreach($post as $item)
         <div class="modal fade" id="delete_article_{{ $item->id  }}" tabindex="-1" role="dialog"
              aria-labelledby="mySmallModalLabel" aria-hidden="true">
-            <form class="" action="{{ route('administrator.destroy', ['id' => $item->id]) }}" method="post">
+            <form class="" action="{{ route('dash.destroy', ['id' => $item->id]) }}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

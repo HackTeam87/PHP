@@ -88,7 +88,7 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="{{url('administrator/create')}}"><i class="fa fa-circle-o"></i> Posts</a></li>
+                <li><a href="{{route('dash.create')}}"><i class="fa fa-circle-o"></i> Posts</a></li>
                 <li><a href="{{route('categories.create')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
                 <li><a href="{{route('article')}}"><i class="fa fa-circle-o"></i> PostsByCategory</a></li>
             </ul>

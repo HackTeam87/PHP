@@ -20,16 +20,20 @@
     @endif
 
 
-
-    <div class="container-fluid">
-        <div class="col-md-5">
-            <nav aria-label="Page navigation ">
-                {{ $calen->links() }}
-            </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <nav aria-label="Page navigation ">
+                    {{ $calen->links() }}
+                </nav>
+            </div>
         </div>
+    </div>
+    <div class="container-fluid">
+
         <div class="row">
 
-            <div class="col-md-7">
+            <div class="col-md-5">
 
                 <div class="table-responsive">
                     <table class="table ">
@@ -40,7 +44,7 @@
 
                         @foreach($calen as $item)
                             <tr>
-                                <td> С  {!! $item->start_date !!}  По  {!! $item->end_date !!}</td>
+                                <td><span class="date">{!! Carbon\Carbon::parse($item->cteated_at)->format(' d m / H:i:s') !!}</span></td>
                                 <td> {!! $item->title !!}</td>
                                 <td>
                                     {{--Delete--}}
@@ -67,7 +71,6 @@
 
                     </div>
 
-                    {{--{!! Form::text('title',null,['class'=>'form-control','placeholder' => 'Заголовок']) !!}--}}
 
                     {!! Form::date('start_date',null, ['class'=>'form-control ']) !!}
                     {!! Form::date('end_date',null, ['class'=>'form-control ']) !!}
@@ -87,7 +90,9 @@
                 </div>
 
             </div>
-            <div class="calendar col-md-5">
+
+
+            <div class="calendar col-md-7">
                 <div class="panel panel-primary">
 
                     <div class="panel-heading">
@@ -103,9 +108,7 @@
                         {!! $calendar->script() !!}
 
                     </div>
-
                 </div>
-
             </div>
 
         </div>
