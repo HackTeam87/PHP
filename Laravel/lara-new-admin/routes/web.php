@@ -51,6 +51,13 @@ Route::get('/', function () {
     return view('site.index');
 });
 
+
+//Vue
+
+Route::get('/vue', function () {
+    return view('vue.vue');
+});
+
 //calendars
 //Route::get('/calendar', function () {
 //    return view('administrator.calendar.date');

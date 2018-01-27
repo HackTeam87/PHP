@@ -52,7 +52,7 @@
                                         <td class="col-md-1">{!! $item->title !!}</td>
                                         <td class="col-md-5">{!! $item->text !!}</td>
                                         <td class="col-md-1">
-                                            <img src="{!!$_SERVER['SERVER_ADDR']  !!}/{!! $item->file !!}" alt="img" width="100px">
+                                            <img src="/{!! $item->file !!}" alt="img" width="100px">
                                         </td>
 
 

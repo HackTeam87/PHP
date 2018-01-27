@@ -70,7 +70,7 @@ class DashController extends Controller
 //        Post::create($request->all());
         $calen = Event::all();
         $mtitle = 'An Post'.' '.$request->title.' '.'has been added';
-        return redirect('administrator/create')->with(['message'=>$mtitle],compact('calen'));
+        return redirect('/adm/dash/create')->with(['message'=>$mtitle],compact('calen'));
     }
 
     //show
@@ -109,7 +109,7 @@ class DashController extends Controller
 
         $calen = Event::all();
         $mtitle = 'An Post'.' '.$request->title.' '.'has been updated';
-        return redirect()->route('administrator.create', $post->id)->with(compact('calen'),['message'=>$mtitle]);
+        return redirect()->route('dash.create', $post->id)->with(compact('calen'),['message'=>$mtitle]);
 
 
     }
@@ -122,7 +122,7 @@ class DashController extends Controller
 
         $post->delete();
 
-        return redirect()->route('administrator.create', $post->id);
+        return redirect()->route('dash.create', $post->id);
     }
 
 
