@@ -6,9 +6,10 @@ Auth::routes();
 
 //Admin-Panel
         Route::group(['middleware' => 'auth'], function () {
+
             //AdminPost
-//    Route::resource('admin-panel', 'DashPosts');
             Route::resource('dash', 'Adm\DashController');
+
             //AdminCategory
             Route::resource('/categories', 'Adm\CategoriesController');
 
@@ -19,6 +20,12 @@ Auth::routes();
 
             //Calendar
             Route::resource('/calendar', 'Adm\EventController');
+
+            //AdminRoles
+            Route::resource('/roles', 'Adm\RolesController');
+
+            //AdminPermissions
+            Route::resource('/permissions', 'Adm\PermissionsController');
 
 
             //Profile

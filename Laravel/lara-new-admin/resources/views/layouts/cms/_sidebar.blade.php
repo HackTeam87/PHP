@@ -31,7 +31,7 @@
         <li class="header">MAIN NAVIGATION</li>
 
         <li>
-            <a href="{{ url('/administrator') }}">
+            <a href="{{ url('/adm/dash') }}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
         </li>
@@ -73,10 +73,8 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                {{--<li><a href="{!! route('roles.index') !!}"><i class="fa fa-circle-o"></i> Roles</a></li>--}}
-                {{--<li><a href="{!! route('permissions.index') !!}"><i class="fa fa-circle-o"></i> Permissions</a></li>--}}
-                <li><a href=""><i class="fa fa-circle-o"></i> Roles</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Permissions</a></li>
+                <li><a href="{!! route('roles.index') !!}"><i class="fa fa-circle-o"></i> Roles</a></li>
+                <li><a href="{!! route('permissions.index') !!}"><i class="fa fa-circle-o"></i> Permissions</a></li>
             </ul>
         </li>
 

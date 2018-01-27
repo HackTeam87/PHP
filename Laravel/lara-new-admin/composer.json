@@ -9,6 +9,7 @@
         "arrilot/laravel-widgets": "^3.9",
         "creativeorange/gravatar": "^1.0",
         "fideloper/proxy": "~3.3",
+        "kalnoy/nestedset": "^4.3",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
